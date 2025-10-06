@@ -19,7 +19,7 @@ public class Lab_3 {
         Rectangle r2 = new Rectangle(center2, 20.5, 10); // Rộng 20.5, Cao 10
         displayFullInfo(r2, "Hình chữ nhật 2");
 
-        //****************************************************************
+        //****************************************************************ssss
         // HÌNH CHỮ NHẬT 3: CHO NGƯỜI DÙNG NHẬP TỪ BÀN PHÍM
         //****************************************************************
         System.out.println("\n\n===== HÌNH CHỮ NHẬT 3 (Nhập từ bàn phím) =====");
