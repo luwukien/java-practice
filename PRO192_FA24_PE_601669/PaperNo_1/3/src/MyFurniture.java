@@ -41,6 +41,9 @@ public class MyFurniture implements IFurniture {
     @Override
     public void f3(List<Furniture> t) {
         List<Furniture> chooseEle = new ArrayList<>();
+        if (t.isEmpty()) {
+            return;
+        }
         double sum = 0;
         for (Furniture furniture : t) {
             sum += furniture.getPrice();
@@ -55,5 +58,8 @@ public class MyFurniture implements IFurniture {
         }
 
         t.removeAll(chooseEle);
+        
+//        t.removeIf(f -> Character.isDigit(f.getName().charAt(0)) && f.getPrice() > avgPrice);
+//      Cach nay gon hon
     }
 }
