@@ -1,4 +1,4 @@
-package lab_4;
+package workshop3_lưu_chí_kiên_he204365;
 
 import java.util.Scanner;
 
@@ -9,7 +9,7 @@ public class Square {
 
     public Square() {
         this.bottomLeftVertice = new Point(0, 0);
-        this.edgeLength = 0;
+        this.edgeLength = 1;
     }
 
     public Square(Point bottomLeftVertice, double edgeLength) {
@@ -49,14 +49,14 @@ public class Square {
         while (true) {
             try {
                 System.out.println("Input engthLength: ");
-                double edge = Double.parseDouble(sc.nextLine());
+                double edge = Double.parseDouble(sc.nextLine().trim());
                 if (edge > 0) {
                     this.edgeLength = edge;
                     break; // Thoát vòng lặp khi nhập đúng
                 } else {
                     System.out.println("Edge length must be positive. Try again!");
                 }
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 System.out.println("ERROR: " + e);
                 System.out.println("Please input number. Try again");
             }
@@ -83,7 +83,6 @@ public class Square {
                 return new Point((int) (x_edge + this.edgeLength), (int) (y_edge + this.edgeLength));
             case 3:
                 return new Point((int) (x_edge + this.edgeLength), y_edge);
-
             default:
                 throw new IllegalArgumentException("Enter the number 1 - 2 - 3");
         }

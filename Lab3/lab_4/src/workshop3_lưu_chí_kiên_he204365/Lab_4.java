@@ -1,4 +1,4 @@
-package lab_4;
+package workshop3_lưu_chí_kiên_he204365;
 
 import java.util.Scanner;
 

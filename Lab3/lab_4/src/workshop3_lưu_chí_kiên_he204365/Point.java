@@ -1,4 +1,4 @@
-package lab_4;
+package workshop3_lưu_chí_kiên_he204365;
 
 import java.util.Scanner;
 
@@ -36,10 +36,10 @@ public class Point {
         while (true) {
             try {
                 System.out.println("Input x: ");
-                int inputX = Integer.parseInt(sc.nextLine());
+                int inputX = Integer.parseInt(sc.nextLine().trim());
                 this.x = inputX;
                 break;
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 System.out.println("ERROR: " + e);
                 System.out.println("Please input number. Try again");
             }
@@ -48,10 +48,10 @@ public class Point {
         while (true) {
             try {
                 System.out.println("Input y: ");
-                int inputY = Integer.parseInt(sc.nextLine());
+                int inputY = Integer.parseInt(sc.nextLine().trim());
                 this.y = inputY;
                 break;
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 System.out.println("ERROR: " + e);
                 System.out.println("Please input number. Try again");
             }
@@ -59,13 +59,8 @@ public class Point {
     }
 
     public void display() {
-        System.out.println("(" + this.x + "," + this.y + ")");
+        System.out.println("Point: " + this.x + "," + this.y);
     }
 
-    public double distance(Point other) {
-        double dx = this.x - other.x;
-        double dy = this.y - other.y;
-        return Math.sqrt(dx * dx + dy * dy);
-    }
 
 }
