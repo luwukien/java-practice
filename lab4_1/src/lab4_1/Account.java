@@ -32,15 +32,16 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{accountNumber:" + accountNumber + ", balance: " + balance + "}";
+        return "Account{accountNumber = " + accountNumber + ", balance = " + balance + "}";
     }
 
     public void withdraw(double amount) {
+        if (amount <= 0) {
+            System.out.println("The amount should be positive");
+            return;
+        }
         if (balance < amount) {
             System.out.println("The balance is not enough");
-            return;
-        } else if (amount <= 0) {
-            System.out.println("The amount should be positive");
             return;
         }
         balance = balance - amount;

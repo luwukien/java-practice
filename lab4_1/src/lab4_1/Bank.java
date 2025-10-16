@@ -1,6 +1,5 @@
 package lab4_1;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Bank {
@@ -37,7 +36,6 @@ public class Bank {
                     if (choice == 1 || choice == 2) {
                         break;
                     }
-                    System.out.println("Account " + (i + 1) + ": which account you want to create (1 - Account, 2 - SavingAccount): ");
                 } catch (NumberFormatException e) {
                     System.out.println("Plz enter number");
                 }
@@ -48,9 +46,9 @@ public class Bank {
 
             double balance;
             while (true) {
-                System.out.println("Please input the balance: ");
+                System.out.println("Please input the balance (not negative number): ");
                 try {
-                    balance = Integer.parseInt(sc.nextLine().trim());
+                    balance = Double.parseDouble(sc.nextLine().trim());
                     if (balance >= 0) {
                         break;
                     }
@@ -59,15 +57,14 @@ public class Bank {
                     System.out.println("Plz enter number");
                 }
             }
-            
+
             double interest;
             if (choice == 1) {
-                listAccount[i] = new Account();
-                listAccount[i].setAccountNumber(accountNumber);
+                listAccount[i] = new Account(accountNumber);
                 listAccount[i].deposit(balance);
             } else {
                 while (true) {
-                    System.out.println("Please input the interest: ");
+                    System.out.println("Please input the interest (not negative number)");
                     try {
                         interest = Double.parseDouble(sc.nextLine().trim());
                         if (interest >= 0) {
@@ -83,18 +80,33 @@ public class Bank {
             }
         }
     }
-    
-    public void display() {         
-        System.out.println(Arrays.toString(listAccount));
+
+    public void display() {
+        for (Account acc : listAccount) {
+            if (acc != null) {
+                System.out.println(acc.toString());
+            }
+        }
     }
-    
+
     public void updateInterest() {
         for (Account list : listAccount) {
             if (list instanceof SavingAccount) {
                 ((SavingAccount) list).addInterest();
             }
-        
+
         }
+    }
+
+    public static void main(String[] args) {
+        Bank newBank = new Bank();
+        newBank.input();
+        System.out.println("List of input accounts: ");
+        newBank.display();
+        newBank.updateInterest();
+        System.out.println("List of accounts after updating interest: ");
+        newBank.display();
+
     }
 
 }

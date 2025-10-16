@@ -10,7 +10,7 @@ public class SavingAccount extends Account {
 
     public SavingAccount(String accountNumber, double interest) {
         super(accountNumber);
-        this.interest = interest;
+        setInterest(interest);
     }
 
     public void setInterest(double interest) {
@@ -23,8 +23,9 @@ public class SavingAccount extends Account {
 
     @Override
     public String toString() {
-        return "Account{accountNumber:" + super.getAccountNumber() + ", balance: " + super.getBalance() 
-                + ", interest: " + interest + "}";
+        return "SavingAccount{accountNumber =" + super.getAccountNumber() + ", balance = " + super.getBalance() 
+                + ", interest = " + interest + "}";
+        
     }
     
     public void addInterest() {
