@@ -28,9 +28,9 @@ public class SavingAccount extends Account {
     }
     
     public void addInterest() {
-        double newBalance = getBalance() + getBalance() * interest;
+        double newBalance = getBalance() * this.interest / 100;
         deposit(newBalance);
     }
-    
+        
 
 }

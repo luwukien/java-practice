@@ -1,12 +1,100 @@
 package lab4_1;
+
+import java.util.Arrays;
 import java.util.Scanner;
+
 public class Bank {
 
     private Account[] listAccount;
-    
+
     public void input() {
+        int numAccount = 0;
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter 1-Account - 2-Saving Account");
-        
+
+        while (true) {
+            System.out.println("Please input the number of Account: ");
+            try {
+                int numAccountInput = Integer.parseInt(sc.nextLine().trim());
+                if (numAccountInput > 0) {
+                    numAccount = numAccountInput;
+                    break;
+                }
+                System.out.println("Plz input number > 0");
+            } catch (NumberFormatException e) {
+                System.out.println("Plz enter integer number");
+            }
+        }
+
+        listAccount = new Account[numAccount];
+
+        for (int i = 0; i < numAccount; i++) {
+            int choice;
+
+            while (true) {
+                System.out.println("Account " + (i + 1) + ": which account you want to create (1 - Account, 2 - SavingAccount): ");
+                try {
+                    choice = Integer.parseInt(sc.nextLine().trim());
+                    if (choice == 1 || choice == 2) {
+                        break;
+                    }
+                    System.out.println("Account " + (i + 1) + ": which account you want to create (1 - Account, 2 - SavingAccount): ");
+                } catch (NumberFormatException e) {
+                    System.out.println("Plz enter number");
+                }
+            }
+
+            System.out.println("Please input the account number: ");
+            String accountNumber = sc.nextLine().trim();
+
+            double balance;
+            while (true) {
+                System.out.println("Please input the balance: ");
+                try {
+                    balance = Integer.parseInt(sc.nextLine().trim());
+                    if (balance >= 0) {
+                        break;
+                    }
+                    System.out.println("Balance > 0");
+                } catch (NumberFormatException e) {
+                    System.out.println("Plz enter number");
+                }
+            }
+            
+            double interest;
+            if (choice == 1) {
+                listAccount[i] = new Account();
+                listAccount[i].setAccountNumber(accountNumber);
+                listAccount[i].deposit(balance);
+            } else {
+                while (true) {
+                    System.out.println("Please input the interest: ");
+                    try {
+                        interest = Double.parseDouble(sc.nextLine().trim());
+                        if (interest >= 0) {
+                            break;
+                        }
+                        System.out.println("Interest > 0");
+                    } catch (NumberFormatException e) {
+                        System.out.println("Plz enter number");
+                    }
+                }
+                listAccount[i] = new SavingAccount(accountNumber, interest);
+                listAccount[i].deposit(balance);
+            }
+        }
     }
+    
+    public void display() {         
+        System.out.println(Arrays.toString(listAccount));
+    }
+    
+    public void updateInterest() {
+        for (Account list : listAccount) {
+            if (list instanceof SavingAccount) {
+                ((SavingAccount) list).addInterest();
+            }
+        
+        }
+    }
+
 }

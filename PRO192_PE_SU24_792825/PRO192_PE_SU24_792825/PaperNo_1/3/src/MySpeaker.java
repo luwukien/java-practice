@@ -1,7 +1,4 @@
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Collections;
 import java.util.Comparator;
 
 /**
@@ -9,9 +6,14 @@ import java.util.Comparator;
  * @author IdeaPad
  */
 public class MySpeaker implements ISpeaker {
-
+    
     @Override
     public int f1(List<Speaker> t) {
+        
+        if (t == null || t.isEmpty()) {
+            return 0;
+        }
+        
         int count = 0;
         for (Speaker speaker : t) {
             if (speaker.getPower() > 10) {
@@ -23,23 +25,18 @@ public class MySpeaker implements ISpeaker {
     
     @Override
     public void f2(List<Speaker> t) {
-        ArrayList<Speaker> listCanSort = new ArrayList<>();
-        for (int i = 0; i <= 4; i++) {
-            listCanSort.add(t.get(i));
+        
+        if (t == null || t.isEmpty() || t.size() < 5) {
+            return;
         }
-
-        Collections.sort(listCanSort, Comparator.comparing(Speaker::getPower));
-
-        int j = 0;
-        for (int i = 0; i <= 4; i++) {
-            t.set(i, listCanSort.get(j));
-            j++;
-        }
+        //Dùng subList để lấy 5 phần tử đầu tiên thay vì duyệt mảng từ 0 - 5: tránh NullPointerException
+        t.subList(0, 5).sort(Comparator.comparing(Speaker::getPower));
+        
     }
     
     @Override
     public void f3(List<Speaker> t) {
-
+        
         if (t == null || t.isEmpty()) {
             return;
         }
@@ -53,12 +50,12 @@ public class MySpeaker implements ISpeaker {
         for (int i = 0; i < t.size(); i++) {
             if (t.get(i).getPower() == min) {
                 countMin++;
-                if (countMin >= 2) {
+                if (countMin == 2) {
                     t.remove(i);
                     break;
                 }
             }
         }
-
+        
     }
 }
