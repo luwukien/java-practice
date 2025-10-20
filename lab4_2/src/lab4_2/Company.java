@@ -10,7 +10,7 @@ public class Company {
 
     private Customer[] listCustomer;
 
-    private void input() {
+    public void input() {
         Scanner sc = new Scanner(System.in);
         int numCustomer = 0;
 

@@ -24,7 +24,11 @@ public class Customer {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        if (phone != null && phone.matches("\\d{10,11}")) {
+            this.phone = phone;
+        } else {
+            this.phone = "0"; 
+        }
     }
 
     public String getAddress() {

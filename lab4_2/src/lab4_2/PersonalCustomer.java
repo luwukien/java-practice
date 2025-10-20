@@ -14,10 +14,10 @@ public class PersonalCustomer extends Customer {
     }
 
 
-    public PersonalCustomer(String name, int loyaltyPoint, String phone, String address) {
+    public PersonalCustomer(String name, String phone, String address) {
         super(phone, address);
         this.name = name;
-        this.loyaltyPoint = loyaltyPoint;
+        this.loyaltyPoint = 0;
     }
 
     public String getName() {
