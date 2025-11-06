@@ -1,3 +1,8 @@
+
+/**
+ *
+ * @author IdeaPad
+ */
 public class Radio {
     private String content;
     private int rate;

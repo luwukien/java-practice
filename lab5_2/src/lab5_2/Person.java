@@ -1,11 +1,7 @@
-package lab5_2;
+    package lab5_2;
 
 import java.util.Scanner;
 
-/**
- * <<abstract class>> Person
- * Base abstract class for all persons.
- */
 public abstract class Person {
     private String name;
     private String address;
@@ -44,9 +40,6 @@ public abstract class Person {
         this.phone = phone;
     }
 
-    /**
-     * Prompts the user to input attributes for the person[cite: 228].
-     */
     public void input() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Input name: ");

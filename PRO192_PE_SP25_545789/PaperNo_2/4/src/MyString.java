@@ -1,71 +1,52 @@
 
-import java.util.ArrayList;
-
 public class MyString implements IString {
 
-    private boolean isPalindrome(String word) {
-        if (word == null) {
-            return false;
-        }
-        return new StringBuilder(word)
-                .reverse()
-                .toString()
-                .equalsIgnoreCase(word);
-
-    }
-
+    @Override
     public int f1(String str) {
-        String[] words = str.split("\\s+");;
-        ArrayList<String> palindromeWords = new ArrayList<>();
-
-
-        for (String word : words) {
-            if (isPalindrome(word)) {
-                palindromeWords.add(word);
+        int[] count = new int[10];
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if (Character.isDigit(ch)) {
+                count[ch - '0']++;
             }
         }
-        int maxLength = 0;
-        int count = 0;
-        for (int i = 0; i < palindromeWords.size(); i++) {
-            if (palindromeWords.get(i).length() > maxLength) {
-                maxLength = palindromeWords.get(i).length();
-            }
+        int maxFre = 0;
+        int maxNum = 0;
+        for (int i = 0; i < count.length; i++) {
+            if (count[i] > maxFre || (count[i] == maxFre && i > maxNum)) {
+                maxFre = count[i];
+                maxNum = i;
+            } 
         }
-
-        for (String paString : palindromeWords) {
-            if (paString.length() == maxLength) {
-                count++;
-            }
-        }
-        return count;
+        
+        if (maxFre == 0) {
+            return -1;
+        } 
+        return maxNum;
     }
 
+    @Override
     public String f2(String str) {
-        String[] words = str.split("\\s+");
-
-        ArrayList<String> palindromeWords = new ArrayList<>();
-        for (String word : words) {
-            if (isPalindrome(word)) {
-                palindromeWords.add(word);
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if (!Character.isDigit(ch)) {
+                result.append(ch);
+            } else {
+                int start = i;
+                int end = i;
+                for (int j = i; j < str.length(); j++) {
+                     if (Character.isDigit(str.charAt(j))) {
+                         end = j;
+                     } else {
+                         break;
+                     }
+                }
+                result.append(new StringBuilder(str.substring(start, end + 1)).reverse());
+                i = end;
             }
         }
-
-        if (palindromeWords.isEmpty()) {
-            return null;
-        }
-
-        int minLength = palindromeWords.get(0).length();
-        for (int i = 0; i < palindromeWords.size(); i++) {
-            if (palindromeWords.get(i).length() < minLength) {
-                minLength = palindromeWords.get(i).length();
-            }
-        }
-
-        for (String pWord : palindromeWords) {
-            if (pWord.length() == minLength) {
-                return pWord;
-            }
-        }
-        return "";
+        return result.toString();
     }
+
 }

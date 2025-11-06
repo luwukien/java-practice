@@ -1,19 +1,32 @@
 
+/**
+ *
+ * @author IdeaPad
+ */
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Iterator;
 
 public class MyRadio implements IRadio {
 
+    private boolean containsDigit(String s) {
+        for (char c : s.toCharArray()) {
+            if (Character.isDigit(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public int f1(List<Radio> t) {
-        int maxRate = -1;
-        for (Radio radio : t) {
-            if (radio.getContent().matches(".*\\d.*")) {
-                if (radio.getRate() > maxRate) {
-                    maxRate = radio.getRate();
+        int maxRate = t.get(0).getRate();
+        for (int i = 0; i < t.size(); i++) {
+            if (containsDigit(t.get(i).getContent())) {
+                if (t.get(i).getRate() > maxRate) {
+                    maxRate = t.get(i).getRate();
                 }
             }
         }
@@ -22,40 +35,33 @@ public class MyRadio implements IRadio {
 
     @Override
     public void f2(List<Radio> t) {
-        List<Radio> listCanSort = new ArrayList<>(); //cần xem lai chỗ này
-
+        List<Radio> toSort = new ArrayList<>();
         for (Radio radio : t) {
             if (!Character.isDigit(radio.getContent().charAt(0))) {
-                listCanSort.add(radio);
+                toSort.add(radio);
             }
         }
 
-        Collections.sort(listCanSort, (r1, r2) -> Integer.compare(r1.getRate(), r2.getRate()));
-        int j = 0;
+        Collections.sort(toSort, Comparator.comparing(Radio::getRate));
+        int index = 0;
         for (int i = 0; i < t.size(); i++) {
             if (!Character.isDigit(t.get(i).getContent().charAt(0))) {
-                t.set(i, listCanSort.get(j));
-                j++;
+                t.set(i, toSort.get(index++));
             }
         }
+
     }
 
     @Override
     public void f3(List<Radio> t) {
-        int minRate = Integer.MAX_VALUE;
+        int minRate = t.get(0).getRate();
         for (Radio radio : t) {
             if (radio.getRate() < minRate) {
                 minRate = radio.getRate();
+            }
+        }
+        final int min = minRate;
 
-            }
-        }
-        
-        Iterator<Radio> iterator = t.iterator();
-        while (iterator.hasNext()) {
-            Radio radio = iterator.next();
-            if (!Character.isDigit(radio.getContent().charAt(0)) && radio.getRate() == minRate) {
-                iterator.remove();
-            }
-        }
+        t.removeIf(radio -> !Character.isDigit(radio.getContent().charAt(0)) && radio.getRate() == min);
     }
 }
