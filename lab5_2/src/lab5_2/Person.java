@@ -52,12 +52,7 @@ public abstract class Person {
 
     @Override
     public String toString() {
-        // [cite: 226]
         return "Person{name = " + name + ", address = " + address + ", phone = " + phone + '}';
     }
-    
-    /**
-     * Abstract method to display person information[cite: 190].
-     */
     public abstract void display();
 }

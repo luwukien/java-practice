@@ -1,17 +1,12 @@
 package lab5_2;
 
-/**
- *
- * @author IdeaPad
- */
-
 import java.util.Scanner;
 
 public class Test {
 
-    Person[] listPersons; // [cite: 259]
+    Person[] listPersons;
 
-    void input() { // [cite: 261-287] (Copied verbatim)
+    void input() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Please input the number of Persons: ");
         int n = Integer.parseInt(sc.nextLine());
@@ -19,8 +14,8 @@ public class Test {
         int kind;
         for (int i = 0; i < listPersons.length; i++) {
             do {
-                System.out.print("Person " + (i + 1) + ": which person do you want to create " +
-                                 "(1- Customer, 2 - Eployee, 3 - Manager): ");
+                System.out.print("Person " + (i + 1) + ": which person do you want to create "
+                        + "(1- Customer, 2 - Eployee, 3 - Manager): ");
                 kind = Integer.parseInt(sc.nextLine());
                 if (kind == 1) {
                     listPersons[i] = new Customer();
@@ -36,7 +31,7 @@ public class Test {
         }
     }
 
-    void display() { // [cite: 288-292] (Copied verbatim)
+    void display() {
         for (Person obj : listPersons) {
             obj.display();
         }
@@ -44,14 +39,13 @@ public class Test {
 
     void testPay() {
         Scanner sc = new Scanner(System.in);
-        
-        for (Person obj : listPersons) { // [cite: 294]
-            // Check if the object is an Employee or Manager using the payable interface 
+
+        for (Person obj : listPersons) {
             if (obj instanceof payable) {
                 // Cast to payable to access the getPaidAmount method
                 payable p = (payable) obj;
-                
-                // Print object info as per example [cite: 332, 337]
+
+                // Print object info as per example 
                 System.out.println(obj.toString());
 
                 double extraBonus = 0;
@@ -72,7 +66,7 @@ public class Test {
                     }
                 }
 
-                // Input deductionAmount with validation (must be non-negative) [cite: 258, 334-335]
+                // Input deductionAmount with validation (must be non-negative) 
                 while (true) {
                     try {
                         System.out.print("Input deduction amount: ");
@@ -80,7 +74,7 @@ public class Test {
                         if (deductionAmount >= 0) {
                             break;
                         } else {
-                            // Example shows re-prompt for negative deduction [cite: 334-335]
+                            // Example shows re-prompt for negative deduction 
                             System.out.println("Deduction must be non-negative. Please input again.");
                         }
                     } catch (NumberFormatException e) {
@@ -95,7 +89,7 @@ public class Test {
         }
     }
 
-    public static void main(String[] args) { // [cite: 298-306] (Copied verbatim)
+    public static void main(String[] args) { 
         Test newTest = new Test();
         newTest.input();
         System.out.println("List of input persons: ");
@@ -103,5 +97,4 @@ public class Test {
         System.out.println("Test pay:");
         newTest.testPay();
     }
-}  
 }

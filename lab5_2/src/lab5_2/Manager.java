@@ -1,13 +1,9 @@
 package lab5_2;
 
-package workshop5_q2;
-
 import java.util.Scanner;
 
-/**
- * Manager class, extends Person and implements payable.
- */
 public class Manager extends Person implements payable {
+
     private double salary;
     private double bonus;
 
@@ -17,8 +13,17 @@ public class Manager extends Person implements payable {
 
     public Manager(String name, String address, String phone, double salary, double bonus) {
         super(name, address, phone);
-        this.setSalary(salary); // Use setters for validation [cite: 250]
-        this.setBonus(bonus);
+        if (salary < 0) {
+            this.salary = 0; 
+        } else {
+            this.salary = salary;
+        }
+        
+        if (bonus < 0) {
+            this.bonus = 0; 
+        } else {
+            this.bonus = bonus;
+        }
     }
 
     public double getSalary() {
@@ -27,7 +32,7 @@ public class Manager extends Person implements payable {
 
     public void setSalary(double salary) {
         if (salary < 0) {
-            this.salary = 0; // [cite: 250]
+            this.salary = 0; 
         } else {
             this.salary = salary;
         }
@@ -39,7 +44,7 @@ public class Manager extends Person implements payable {
 
     public void setBonus(double bonus) {
         if (bonus < 0) {
-            this.bonus = 0; // [cite: 250]
+            this.bonus = 0; 
         } else {
             this.bonus = bonus;
         }
@@ -47,10 +52,8 @@ public class Manager extends Person implements payable {
 
     @Override
     public void input() {
-        super.input(); // [cite: 253]
+        super.input(); 
         Scanner sc = new Scanner(System.in);
-        
-        // Input salary with validation [cite: 254]
         while (true) {
             try {
                 System.out.print("Input salary: ");
@@ -65,8 +68,7 @@ public class Manager extends Person implements payable {
                 System.out.println("Invalid number. Please input again.");
             }
         }
-        
-        // Input bonus with validation [cite: 254]
+
         while (true) {
             try {
                 System.out.print("Input bonus: ");
@@ -85,20 +87,17 @@ public class Manager extends Person implements payable {
 
     @Override
     public String toString() {
-        // [cite: 251]
-        return "Manager{name = " + getName() + ", address = " + getAddress() + 
-               ", phone = " + getPhone() + ", salary = " + salary + ", bonus = " + bonus + '}';
+        return "Manager{name = " + getName() + ", address = " + getAddress()
+                + ", phone = " + getPhone() + ", salary = " + salary + ", bonus = " + bonus + '}';
     }
 
     @Override
     public void display() {
-        // [cite: 255] [Corrected based on example output, not PDF typo]
         System.out.println("I am a manager: " + this.toString());
     }
 
     @Override
     public double getPaidAmount(double deductionAmount, double extraBonus) {
-        // [cite: 255]
         return this.salary + this.bonus + extraBonus - deductionAmount;
     }
 }

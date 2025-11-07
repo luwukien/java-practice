@@ -1,15 +1,7 @@
 package lab5_2;
 
-/**
- *
- * @author IdeaPad
- */
-
 import java.util.Scanner;
 
-/**
- * Customer class, extends Person.
- */
 public class Customer extends Person {
     private int loyaltyPoints;
 
@@ -32,13 +24,13 @@ public class Customer extends Person {
 
     @Override
     public void input() {
-        super.input(); // [cite: 234]
+        super.input(); 
         Scanner sc = new Scanner(System.in);
         while (true) {
             try {
                 System.out.print("Input loyaltyPoints: ");
                 int points = Integer.parseInt(sc.nextLine());
-                if (points >= 0) { // [cite: 235]
+                if (points >= 0) { 
                     this.loyaltyPoints = points;
                     break;
                 } else {
@@ -52,14 +44,13 @@ public class Customer extends Person {
 
     @Override
     public String toString() {
-        // [cite: 232]
+ 
         return "Customer{name = " + getName() + ", address = " + getAddress() + 
                ", phone = " + getPhone() + ", loyaltyPoints = " + loyaltyPoints + '}';
     }
 
     @Override
     public void display() {
-        // [cite: 236]
         System.out.println("I am a customer: " + this.toString());
     }
 }
